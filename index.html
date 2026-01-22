@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>AnimeVerse – Katalog Anime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -20,23 +21,37 @@
       text-align: center;
     }
     input {
-      width: 80%;
-      max-width: 400px;
+      width: 85%;
+      max-width: 420px;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
+      font-size: 16px;
     }
     .catalog {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
-      padding: 30px;
+      padding: 25px;
     }
     .card {
       background: #1e293b;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 12px;
       text-align: center;
+      transition: transform .2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .card h3 {
+      font-size: 15px;
+      margin: 0;
     }
   </style>
 </head>
@@ -55,10 +70,38 @@
 
 <script>
   const anime = [
-    "Naruto","One Piece","Bleach","Attack on Titan","Demon Slayer",
-    "Jujutsu Kaisen","Chainsaw Man","Spy x Family","Dragon Ball",
-    "Death Note","Tokyo Ghoul","Sword Art Online","Blue Lock",
-    "Haikyuu","Black Clover","Fairy Tail","Boruto","Hunter x Hunter"
+    {
+      title: "Naruto",
+      image: "https://i.imgur.com/9Xq7ZQp.jpg"
+    },
+    {
+      title: "One Piece",
+      image: "https://i.imgur.com/8RKXAIV.jpg"
+    },
+    {
+      title: "Attack on Titan",
+      image: "https://i.imgur.com/5ZQ0XQh.jpg"
+    },
+    {
+      title: "Demon Slayer",
+      image: "https://i.imgur.com/2yaf2wb.jpg"
+    },
+    {
+      title: "Jujutsu Kaisen",
+      image: "https://i.imgur.com/5x8cM9O.jpg"
+    },
+    {
+      title: "Chainsaw Man",
+      image: "https://i.imgur.com/1XK8Q7F.jpg"
+    },
+    {
+      title: "Death Note",
+      image: "https://i.imgur.com/7s6Q0Yp.jpg"
+    },
+    {
+      title: "Spy x Family",
+      image: "https://i.imgur.com/RpM5kEF.jpg"
+    }
   ];
 
   const list = document.getElementById("animeList");
@@ -69,15 +112,20 @@
     data.forEach(a => {
       const d = document.createElement("div");
       d.className = "card";
-      d.innerText = a;
+      d.innerHTML = `
+        <img src="${a.image}" alt="${a.title}">
+        <h3>${a.title}</h3>
+      `;
       list.appendChild(d);
     });
   }
 
   search.addEventListener("input", e => {
-    render(anime.filter(a =>
-      a.toLowerCase().includes(e.target.value.toLowerCase())
-    ));
+    render(
+      anime.filter(a =>
+        a.title.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
   });
 
   render(anime);

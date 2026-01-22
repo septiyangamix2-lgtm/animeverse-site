@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeVerse – Katalog Anime</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+    }
+    header {
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+    }
+    .search {
+      padding: 20px;
+      text-align: center;
+    }
+    input {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+    }
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .card {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AnimeVerse</h1>
+  <p>Katalog Anime Gratis</p>
+</header>
+
+<div class="search">
+  <input type="text" id="search" placeholder="Cari anime...">
+</div>
+
+<div class="catalog" id="animeList"></div>
+
+<script>
+  const anime = [
+    "Naruto","One Piece","Bleach","Attack on Titan","Demon Slayer",
+    "Jujutsu Kaisen","Chainsaw Man","Spy x Family","Dragon Ball",
+    "Death Note","Tokyo Ghoul","Sword Art Online","Blue Lock",
+    "Haikyuu","Black Clover","Fairy Tail","Boruto","Hunter x Hunter"
+  ];
+
+  const list = document.getElementById("animeList");
+  const search = document.getElementById("search");
+
+  function render(data) {
+    list.innerHTML = "";
+    data.forEach(a => {
+      const d = document.createElement("div");
+      d.className = "card";
+      d.innerText = a;
+      list.appendChild(d);
+    });
+  }
+
+  search.addEventListener("input", e => {
+    render(anime.filter(a =>
+      a.toLowerCase().includes(e.target.value.toLowerCase())
+    ));
+  });
+
+  render(anime);
+</script>
+
+</body>
+</html>
